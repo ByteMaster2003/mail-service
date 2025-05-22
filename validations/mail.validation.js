@@ -6,6 +6,7 @@ export const composeMailSchema = {
 	body: z.object({
 		name: z.string({ required_error: "name is required!" }),
 		email: z.string({ required_error: "email is required!" }).email("Invalid email!"),
-		message: z.string({ required_error: "message is required!" })
+		message: z.string({ required_error: "message is required!" }),
+		state: z.string().nanoid().optional()
 	})
 }
