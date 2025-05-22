@@ -1,6 +1,7 @@
 import express from "express";
 import helmet from "helmet";
 import httpStatus from "http-status";
+import cors from "cors"
 
 import { AppConfig } from "./env.config.js";
 import { RateLimiter } from "./utils/rate-limiter.js";
@@ -13,6 +14,12 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.options("viveksahani.com", cors())
+app.use(cors({
+	origin: "viveksahani.com",
+	methods: ["POST"]
+}))
 
 // set security HTTP headers
 app.use(helmet());
