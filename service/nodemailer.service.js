@@ -50,16 +50,20 @@ const sendEmailFromPortfolio = async (name, email, message) => {
             <p>
               <span
                 style="font-weight: 600; font-size: larger; color: rgb(3, 93, 158)"
-                >Message From: </span
+                >from: </span
               >${name}
             </p>
             <p>
               <span
                 style="font-weight: 600; font-size: larger; color: rgb(3, 93, 158)"
-                >Email: </span
+                >email: </span
               >${email}
             </p>
-            <p style="color: rgb(0, 132, 255)">
+            <p>
+						<span
+                style="font-weight: 600; font-size: larger; color: rgb(3, 93, 158)"
+                >message: </span
+              >
               ${message}
             </p>
           </div>

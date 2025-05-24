@@ -9,8 +9,8 @@ export const validate = (schema) => (req, _, next) => {
 
   try {
     if (params) params.parse(reqParams);
-    if (query) params.parse(reqQuery);
-    if (body) params.parse(reqBody);
+    if (query) query.parse(reqQuery);
+    if (body) body.parse(reqBody);
 
     return next();
   } catch (error) {
