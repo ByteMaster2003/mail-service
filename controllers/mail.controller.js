@@ -2,14 +2,16 @@ import httpStatus from "http-status";
 
 import {
 	sendEmailFromPortfolio,
-	sendGmail,
+	sendZohoMail,
 } from "../service/nodemailer.service.js";
 import { catchAsync } from "../utils/catch-async.util.js";
 
 export const composeMail = catchAsync(async (req, res) => {
 	const { name, email, message, state } = req.body;
 
-	await sendGmail(
+	await sendEmailFromPortfolio(name, email, message);
+
+	await sendZohoMail(
 		email,
 		"📬 Got your message – Let's connect!",
 		`
@@ -29,7 +31,6 @@ Vivek Sahani
 		`
 	);
 
-	await sendEmailFromPortfolio(name, email, message);
 	return res.status(httpStatus.OK).json({
 		statusCode: httpStatus.OK,
 		message: "Mail sent successfully",

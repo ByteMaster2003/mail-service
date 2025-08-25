@@ -3,6 +3,8 @@ import { AppConfig } from "../env.config.js";
 
 const user = AppConfig.SENDER;
 const pass = AppConfig.PASS_KEY;
+const zohoMail = AppConfig.RECEIVER;
+const zohoPass = AppConfig.ZOHO_PASS_KEY;
 
 const transporter = new createTransport({
 	host: "smtp.gmail.com",
@@ -11,6 +13,16 @@ const transporter = new createTransport({
 	auth: {
 		user,
 		pass,
+	},
+});
+
+const zohoTransporter = new createTransport({
+	host: "smtp.zoho.in",
+	port: 465,
+	secure: true,
+	auth: {
+		user: zohoMail,
+		pass: zohoPass,
 	},
 });
 
@@ -31,10 +43,27 @@ const sendGmail = async (to, subject, text) => {
 	});
 };
 
+const sendZohoMail = async (to, subject, text) => {
+	const mailOptions = {
+		from: `Vivek Sahani <${zohoMail}>`,
+		to,
+		subject,
+		text,
+	};
+
+	return await zohoTransporter.sendMail(mailOptions, (error, info) => {
+		if (error) {
+			console.error(error);
+		} else {
+			console.log("Email sent: " + info.response);
+		}
+	});
+};
+
 const sendEmailFromPortfolio = async (name, email, message) => {
 	const mailOptions = {
 		from: user,
-		to: AppConfig.RECEIVER,
+		to: zohoMail,
 		subject: "Message From Portfolio",
 		html: `
       <html>
@@ -81,4 +110,6 @@ const sendEmailFromPortfolio = async (name, email, message) => {
 	});
 };
 
-export { sendGmail, sendEmailFromPortfolio };
+sendZohoMail("viveksahani2003@duck.com", "Test Subject", "Test Email Body");
+
+export { sendGmail, sendZohoMail, sendEmailFromPortfolio };

@@ -1,6 +1,7 @@
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import dotenv from "dotenv"
+import { ZodSchema } from 'zod';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -12,5 +13,6 @@ export const AppConfig = {
   PORT: process.env.PORT || 8080,
   RECEIVER: process.env.PORTFOLIO_RECEIVER,
   SENDER: process.env.SENDER_GMAIL,
-  PASS_KEY: process.env.GOOGLE_PASS_KEY
+  PASS_KEY: process.env.GOOGLE_PASS_KEY,
+  ZOHO_PASS_KEY: process.env.ZOHO_PASS_KEY
 }
